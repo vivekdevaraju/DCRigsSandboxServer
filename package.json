@@ -1,0 +1,29 @@
+{
+  "name": "dcdevserver",
+  "version": "1.0.0",
+  "description": "A Sandbox Server for DC Rigs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "restful",
+    "api"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/vivekdevaraju/DCRigsSandboxServer.git"
+  },
+  "author": "Vivek Devaraju",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vivekdevaraju/DCRigsSandboxServer/issues"
+  },
+  "homepage": "https://github.com/vivekdevaraju/DCRigsSandboxServer#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "nodemon": "^1.17.3",
+    "npm": "^5.8.0"
+  }
+}
