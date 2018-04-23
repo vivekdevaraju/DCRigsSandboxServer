@@ -8,8 +8,13 @@ res.status(200).json({
 });
 
 router.post('/',(req,res,next) =>{
-        res.status(202).json({
-        message:'bookings were created'
+    const booking = {
+        userName : req.body.userName,
+        userEmail : req.body.userEmail
+    };
+            res.status(202).json({
+            message:'bookings were created',
+            createdBooking : booking
         });
 });
 
