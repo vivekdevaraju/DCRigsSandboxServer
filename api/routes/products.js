@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const _logger = require('morgan');
 const Product = require('../models/product');
 
+
+//Get All Products
 router.get('/', (req,res,next)=> {
     Product.find()
     .exec()
@@ -14,6 +16,8 @@ router.get('/', (req,res,next)=> {
     });
 });
 
+
+//Create a new Product
 router.post('/', (req,res,next)=> {   
     var product = new Product({
         _id : new mongoose.Types.ObjectId(),
@@ -31,6 +35,8 @@ router.post('/', (req,res,next)=> {
     });
 });
 
+
+//Get a Specific Product
 router.get('/:productId',(req,res,next)=> {  
     const id = req.params.productId;
     console.log(id);
@@ -50,16 +56,46 @@ router.get('/:productId',(req,res,next)=> {
     });
 });
 
-router.patch('/:productId',(req,res,next)=> {  
-        res.status(200).json({
-            message : 'Updated Product'
-        });   
+
+//Update a Product
+router.patch('/:productId',(req,res,next)=> {
+    const productId = req.params.productId;
+    console.log(productId);
+    const updateOps = {};
+    for(const ops of req.body){
+        updateOps[ops.propName] = ops.value;
+    }
+    Product.update({_id:productId},{$set : updateOps})
+    .exec()
+    .then(result => {
+        console.log(result);
+        res.status(200).json(result);
+    })
+    .catch(error => {
+        console.log(error);
+        res.status(500).json({
+            message : 'Unable to Update the Product, Please try again later'
+        }) 
+    });
+});  
+          
+
+//Remove a product
+router.delete('/:productId',(req,res,next)=> {
+    const productId = req.params.productId;
+    Product.remove({_id : productId})
+    .exec()
+    .then(result => {
+        res.status(200).json(result);
+    })
+    .catch(error =>{
+        console.log(error);
+        res.status(500).json({
+            message : error
+        });
+    });  
+       
 });
 
 
-router.delete('/:productId',(req,res,next)=> {  
-    res.status(200).json({
-        message : 'Deleted Product'
-    });   
-});
 module.exports = router;
