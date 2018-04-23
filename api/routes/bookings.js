@@ -22,7 +22,7 @@ router.get('/:bookingId',(req,res,next) =>{
 });
 
 router.delete('/:bookingId',(req,res,next) =>{
-    res.status(200).json({
+    res.status(202).json({
         message:'bookings were deleted',
         orderId : req.params.bookingId
     });
